@@ -25,4 +25,13 @@ class TestBoard < Minitest::Test
 		result[4] = "O"
 		assert_equal(result, board.setup)
 	end
+
+	def test_8th_pos_equals_x
+		board = Board.new
+		board.setup = ["X", "", "", "", "O", "", "", "", ""]
+		board.set_position(7, "X")
+		result = ["X", "", "", "", "O", "", "", "X", ""]
+		assert_equal(result, board.setup)
+
+	end
 end

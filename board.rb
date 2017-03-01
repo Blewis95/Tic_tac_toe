@@ -1,5 +1,5 @@
 class Board
-	attr_reader :setup
+	attr_accessor :setup
 	def initialize
 		@setup = ["", "", "", "", "", "", "", "", ""]
 	end
