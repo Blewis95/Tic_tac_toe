@@ -8,11 +8,15 @@ class Board
 		@setup[position] = marker
 	end
 
-	def check_position(position)
+	def check_position?(position)
 		if @setup[position] == ""
 			true
 		else
 			false
 		end
+	end
+
+	def check_full?()
+		@setup.count("") == 0
 	end
 end

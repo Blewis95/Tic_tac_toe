@@ -38,42 +38,60 @@ class TestBoard < Minitest::Test
 	def test_full_spot
 		board = Board.new
 		board.setup = ["X", "", "", "", "O", "", "", "X", ""]
-		result = board.check_position(0)
+		result = board.check_position?(0)
 		assert_equal(false, result)
 	end
 
 	def test_empty_spot
 		board = Board.new
 		board.setup = ["X", "", "", "", "O", "", "", "X", ""]
-		result = board.check_position(1)
+		result = board.check_position?(1)
 		assert_equal(true, result)
 	end
 
 	def test_new_spot
 		board = Board.new
 		board.setup = ["X", "O", "", "", "O", "", "X", "X", "X"]
-		result = board.check_position(1)
+		result = board.check_position?(1)
 		assert_equal(false, result)
 	end
 
 	def test_new_spot2
 		board = Board.new
 		board.setup = ["X", "O", "", "", "O", "", "X", "X", "X"]
-		result = board.check_position(8)
+		result = board.check_position?(8)
 		assert_equal(false, result)
 	end
 
 	def test_new_spot3
 		board = Board.new
 		board.setup = ["X", "O", "", "", "O", "", "X", "X", "X"]
-		result = board.check_position(15)
+		result = board.check_position?(15)
 		assert_equal(false, result)
 	end
 
 	def test_new_spot4
 		board = Board.new
 		board.setup = ["X", "O", "", "", "O", "", "X", "X", "X"]
-		result = board.check_position(-4)
+		result = board.check_position?(-4)
 		assert_equal(true, result)
+	end
+
+	def test_full_board_equals_game_over
+		board = Board.new
+		board.setup = ["X", "O", "O", "O", "O", "X", "X", "X", "X"]
+		assert_equal(true, board.check_full?)
+	end
+
+	def test_almost_full
+		board = Board.new
+		board.setup = ["X", "X", "O", "O", "O", "", "X", "X", "X"]
+		assert_equal(false, board.check_full?)
+	end
+
+	def test_empty_board
+		board = Board.new
+		board.setup = ["", "", "", "", "", "", "", "", ""]
+		assert_equal(false, board.check_full?)
 	end
 end
