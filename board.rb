@@ -5,6 +5,6 @@ class Board
 	end
 
 	def set_position(position, marker)
-		@board[position] = marker
+		@setup[position] = marker
 	end
 end
