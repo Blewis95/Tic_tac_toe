@@ -13,6 +13,9 @@ class TestSequentialAI < Minitest::Test
 		board = Board.new
 		ai1 = Sequential.new
 		result = 0
-		assert_equal(result, ai1.pick_spot(board))
+		assert_equal(result, ai1.counter)
+		assert_equal(["X", "X", "X"], ai1.pick_spot(board))
 	end
+
+
 end
