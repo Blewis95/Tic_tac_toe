@@ -20,9 +20,9 @@ class TestBoard < Minitest::Test
 		board = Board.new
 		board.set_position(0, "X")
 		result = Array.new(9, "")
-		result[0] = "X"
+		result = ["X", "", "", "", "O", "", "", "", ""]
 		board.set_position(4, "O")
-		result[4] = "O"
+		
 		assert_equal(result, board.setup)
 	end
 
