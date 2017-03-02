@@ -6,7 +6,15 @@ class Sequential
 	end
 
 	def pick_spot(board)
-		@create.pop
-		@create
+		if board.check_position?(@counter)
+			board.set_position(@counter, @create.pop)
+			@counter+= 1
+		else
+			@counter+=1
+			board.set_position(@counter, @create.pop)
+			@counter+= 1
+		end
+
+		board.setup
 	end
 end

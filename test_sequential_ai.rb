@@ -12,10 +12,15 @@ class TestSequentialAI < Minitest::Test
 	def test_pick_spot
 		board = Board.new
 		ai1 = Sequential.new
-		result = 0
-		assert_equal(result, ai1.counter)
-		assert_equal(["X", "X", "X"], ai1.pick_spot(board))
+		result = ["X", "", "", "", "", "", "", "", ""]
+		assert_equal(result, ai1.pick_spot(board))
 	end
 
-
+	def test_pick_full_spot
+		board = Board.new
+		ai1 = Sequential.new
+		board.set_position(0, "O")
+		result = ["O", "X", "", "", "", "", "", "", ""]
+		assert_equal(result, ai1.pick_spot(board))
+	end
 end
