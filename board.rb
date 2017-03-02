@@ -19,4 +19,8 @@ class Board
 	def check_full?()
 		@setup.count("") == 0
 	end
+
+	def check_win?()
+		
+	end
 end

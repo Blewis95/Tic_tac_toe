@@ -32,4 +32,5 @@ class TestSequentialAI < Minitest::Test
 		result = ["O", "O", "X", "", "", "", "", "", ""]
 		assert_equal(result, ai1.pick_spot(board))
 	end
+
 end
