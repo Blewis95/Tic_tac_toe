@@ -94,4 +94,28 @@ class TestBoard < Minitest::Test
 		board.setup = ["", "", "", "", "", "", "", "", ""]
 		assert_equal(false, board.check_full?)
 	end
+
+	def test_win1
+		board = Board.new
+		board.setup = ["X", "X", "X", "", "", "", "", "", ""]
+		assert_equal(true, board.check_win?)
+	end
+
+	def test_win2
+		board = Board.new
+		board.setup = ["O", "O", "O", "", "", "", "", "", ""]
+		assert_equal(true, board.check_win?)
+	end
+
+	def test_win3
+		board = Board.new
+		board.setup = ["X", "X", "X", "O", "", "", "", "", "O"]
+		assert_equal(true, board.check_win?)
+	end
+
+	def test_loss
+		board = Board.new
+		board.setup = ["X", "O", "X", "O", "", "", "", "", "O"]
+		assert_equal(false, board.check_win?)
+	end
 end
