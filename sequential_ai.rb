@@ -1,8 +1,9 @@
 class Sequential
-	attr_reader :create, :counter
+	attr_reader :create, :counter, :turn
 	def initialize
-		@create = ["X", "X", "X", "X"]
+		@create = ["X", "X", "X", "X", "X"]
 		@counter = 0
+		@turn = nil
 	end
 
 	def pick_spot(board)

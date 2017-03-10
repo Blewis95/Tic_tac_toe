@@ -1,8 +1,9 @@
 class Random_ai
-	attr_accessor :create, :counter
+	attr_accessor :create, :counter, :turn
 	def initialize
-		@create = ["X", "X", "X", "X"]
+		@create = ["X", "X", "X", "X", "X"]
 		@counter = rand(0..8)
+		@turn = nil
 	end
 
 	def pick_spot(board)
