@@ -8,6 +8,6 @@ class TestGame < Minitest::Test
 		board = Board.new
 		player1 = Random_ai.new
 		player2 = Random_ai.new
-		assert_equal()
+		assert_equal(["X", "X", "X", "X", "X"],player1.create)
 	end
 end
