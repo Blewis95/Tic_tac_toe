@@ -5,7 +5,7 @@ require_relative "board.rb"
 class TestSequentialAI < Minitest::Test
 	def test_new_ai
 		ai1 = Sequential.new
-		result = ["X", "X", "X", "X"]
+		result = ["X", "X", "X", "X", "X"]
 		assert_equal(result, ai1.create)
 	end
 

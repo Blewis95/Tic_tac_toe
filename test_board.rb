@@ -118,4 +118,5 @@ class TestBoard < Minitest::Test
 		board.setup = ["X", "O", "X", "O", "", "", "", "", "O"]
 		assert_equal(false, board.check_win?)
 	end
+
 end
