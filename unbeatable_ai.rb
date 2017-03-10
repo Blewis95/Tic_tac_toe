@@ -24,17 +24,12 @@ class Unbeatable_ai
 
 		winning.each do |option|
 			option.each do |spot|
-				if board.setup[spot] == "X"
-					counter += 1
-				end
-			end
-
-			if counter == 2
-				option.each do |spot|
-					if (board.setup[spot] == "")
-						@counter = spot
-					end
-				end
+				# if board.setup[spot] == "X"
+				# 	counter += 1
+				# 	if counter == 2
+				# 		if board.setup[winning[option].index]
+				# 	end
+				# end
 			end
 		end
 	end
