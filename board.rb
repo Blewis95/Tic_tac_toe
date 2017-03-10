@@ -43,4 +43,25 @@ class Board
 
 		return winner
 	end
+
+	def print_board
+		for j in 0..6
+
+			for i in 0..6
+
+				if i % 4 == 0
+					print "		"
+					print "|"
+				end
+			end
+			puts "		"
+
+			for i in 0..6
+				if j % 4 == 0
+					print "-"
+				end
+				
+			end
+		end
+	end
 end
