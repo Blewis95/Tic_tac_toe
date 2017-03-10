@@ -2,7 +2,6 @@ require_relative "board.rb"
 require_relative "random_ai.rb"
 require_relative "sequential_ai.rb"
 
-
 board = Board.new
 
 puts "Welcome to Tic Tac Toe"
@@ -35,28 +34,5 @@ end
 # puts player1
 # puts player2
 
-while board.check_win? == false do
-	if turn == 1
-
-		puts "Player 1 it's your turn!"
-		print "pick a spot between 0-8"
-		p1_spot = gets.chomp
-
-		if board.check_position?(p1_spot) == true
-			board.set_position(p1_spot)
-		else
-			puts "Spot it full!"
-		end
-	else
-		puts "Player 2 it's your turn!"
-		print "pick a spot between 0-8"
-		p2_spot = gets.chomp
-
-		if board.check_position?(p2_spot) == true
-			board.set_position(p2_spot)
-		else
-			puts "Spot it full!"
-		end
-	end
-
-end
+player1.turn == true
+player2.create = ["O", "O", "O", "O"]
