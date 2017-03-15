@@ -1,7 +1,7 @@
 class Board
 	attr_accessor :setup
 	def initialize
-		@setup = ["", "", "", "", "", "", "", "", ""]
+		@setup = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 	end
 
 	def set_position(position, marker)
@@ -9,7 +9,7 @@ class Board
 	end
 
 	def check_position?(position)
-		if @setup[position] == ""
+		if @setup[position] == " "
 			true
 		else
 			false
@@ -17,7 +17,7 @@ class Board
 	end
 
 	def check_full?()
-		@setup.count("") == 0
+		@setup.count(" ") == 0
 	end
 
 	def check_win?
@@ -46,6 +46,8 @@ class Board
 	end
 
 	def print_board
+
+		print "\n"
 		print @setup[0]
 		print @setup[1]
 		print @setup[2]

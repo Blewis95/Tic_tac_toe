@@ -13,7 +13,7 @@ class TestSequentialAI < Minitest::Test
 		board = Board.new
 		ai1 = Sequential.new
 		ai1.turn = true
-		result = ["X", "", "", "", "", "", "", "", ""]
+		result = ["X", " ", " ", " ", " ", " ", " ", " ", " "]
 		ai1.pick_spot(board)
 		assert_equal(result, board.setup)
 	end
@@ -23,7 +23,7 @@ class TestSequentialAI < Minitest::Test
 		ai1 = Sequential.new
 		ai1.turn = true
 		board.set_position(0, "O")
-		result = ["O", "X", "", "", "", "", "", "", ""]
+		result = ["O", "X", " ", " ", " ", " ", " ", " ", " "]
 		ai1.pick_spot(board)
 		assert_equal(result, board.setup)
 	end
@@ -34,7 +34,7 @@ class TestSequentialAI < Minitest::Test
 		ai1.turn = true
 		board.set_position(0, "O")
 		board.set_position(1, "O")
-		result = ["O", "O", "X", "", "", "", "", "", ""]
+		result = ["O", "O", "X", " ", " ", " ", " ", " ", " "]
 		ai1.pick_spot(board)
 		assert_equal(result, board.setup)
 	end
