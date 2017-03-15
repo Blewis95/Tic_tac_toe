@@ -56,7 +56,10 @@ while board.check_full? == false
 
 	board.print_board
 
-	if board.check_win? == true || board.check_full? == true
+	if board.check_win? == true
+		puts "Player 1 wins!"
+		break
+	elsif board.check_full? == true
 		break
 	end
 
@@ -67,6 +70,7 @@ while board.check_full? == false
 	board.print_board
 
 	if board.check_win? == true
+		puts "Player 2 wins!"
 		break
 	end
 

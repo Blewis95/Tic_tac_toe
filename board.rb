@@ -37,7 +37,7 @@ class Board
 				end
 				if matches == 3
 					winner = true
-					puts "The winner is #{mark}!"
+					# puts "The winner is #{mark}!"
 				end
 			end
 		end
