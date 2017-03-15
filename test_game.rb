@@ -29,4 +29,22 @@ class TestGame < Minitest::Test
 		assert_equal(true, player2.turn)
 		assert_equal(false, player1.turn)
 	end
+
+	def test_first_turn
+		game = Game.new
+		board = Board.new
+		player1 = Random_ai.new
+		player2 = Random_ai.new
+		player1.turn = game.turn
+		player2.turn = false
+		game.change_markers(player2)
+
+		puts board.setup.include?("X")	#should be false
+
+		player1.pick_spot(board)
+		game.change_turn(player1, player2)
+		result = board.setup.include?("X")
+
+		assert_equal(true, result)
+	end
 end
