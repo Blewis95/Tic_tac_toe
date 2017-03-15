@@ -7,11 +7,13 @@ class Random_ai
 	end
 
 	def pick_spot(board)
-		while board.check_position?(@counter) == false
+		while (board.check_position?(@counter) == false)
 			@counter = rand(0..8)
 		end
 
-		board.set_position(@counter, @create.pop)
+		if (@turn == true)
+			board.set_position(@counter, @create.pop)
+		end
 
 		return board
 	end

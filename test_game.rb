@@ -10,7 +10,7 @@ class TestGame < Minitest::Test
 		board = Board.new
 		player1 = Random_ai.new
 		player2 = Random_ai.new
-		player1.turn = game.turn
+		player1.turn = true
 		game.change_markers(player2)
 		assert_equal(["X", "X", "X", "X", "X"],player1.create)
 		assert_equal(["O","O","O","O"],player2.create)
@@ -21,7 +21,7 @@ class TestGame < Minitest::Test
 		board = Board.new
 		player1 = Random_ai.new
 		player2 = Random_ai.new
-		player1.turn = game.turn
+		player1.turn = true
 		player2.turn = false
 		game.change_markers(player2)
 		game.change_turn(player1,player2)
@@ -30,16 +30,32 @@ class TestGame < Minitest::Test
 		assert_equal(false, player1.turn)
 	end
 
-	def test_first_turn
+	def test_first_turn_random
 		game = Game.new
 		board = Board.new
 		player1 = Random_ai.new
 		player2 = Random_ai.new
-		player1.turn = game.turn
+		player1.turn = true
 		player2.turn = false
 		game.change_markers(player2)
 
-		puts board.setup.include?("X")	#should be false
+		#puts board.setup.include?("X")	#should be false
+
+		player1.pick_spot(board)
+		game.change_turn(player1, player2)
+		result = board.setup.include?("X")
+
+		assert_equal(true, result)
+	end
+
+	def test_first_turn_sequential
+		game = Game.new
+		board = Board.new
+		player1 = Sequential.new
+		player2 = Sequential.new
+		player1.turn = true
+		player2.turn = false
+		game.change_markers(player2)
 
 		player1.pick_spot(board)
 		game.change_turn(player1, player2)
