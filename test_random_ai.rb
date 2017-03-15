@@ -13,6 +13,7 @@ class TestRandomAI < Minitest::Test
 		board = Board.new
 		ai1 = Random_ai.new
 		result = true
+		ai1.turn = true
 		ai1.pick_spot(board)
 		assert_equal(result , board.setup.include?("X"))
 	end
@@ -20,6 +21,7 @@ class TestRandomAI < Minitest::Test
 	def test_pick_full_spot
 		board = Board.new
 		ai1 = Random_ai.new
+		ai1.turn = true
 		board.set_position(0, "O")
 		ai1.counter = 0
 		ai1.pick_spot(board)

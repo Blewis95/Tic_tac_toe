@@ -37,10 +37,29 @@ class Board
 				end
 				if matches == 3
 					winner = true
+					puts "The winner is #{mark}!"
 				end
 			end
 		end
 
 		return winner
+	end
+
+	def print_board
+		print @setup[0]
+		print @setup[1]
+		print @setup[2]
+		print "\n"
+		puts "---"
+		print @setup[3]
+		print @setup[4]
+		print @setup[5]
+		print "\n"
+		puts "---"
+		print @setup[6]
+		print @setup[7]
+		print @setup[8]
+		print "\n"
+		puts "********************"
 	end
 end

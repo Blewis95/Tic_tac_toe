@@ -3,7 +3,7 @@ class Sequential
 	def initialize
 		@create = ["X", "X", "X", "X", "X"]
 		@counter = 0
-		@turn = nil
+		@turn = false
 	end
 
 	def pick_spot(board)
@@ -15,6 +15,6 @@ class Sequential
 			board.set_position(@counter, @create.pop)
 		end
 
-		board.setup
+		return board
 	end
 end

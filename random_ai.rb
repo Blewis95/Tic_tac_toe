@@ -3,11 +3,11 @@ class Random_ai
 	def initialize
 		@create = ["X", "X", "X", "X", "X"]
 		@counter = rand(0..8)
-		@turn = nil
+		@turn = false
 	end
 
 	def pick_spot(board)
-		while (board.check_position?(@counter) == false)
+		while board.check_position?(@counter) == false
 			@counter = rand(0..8)
 		end
 

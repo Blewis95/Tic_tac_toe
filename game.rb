@@ -3,9 +3,9 @@ require_relative "random_ai.rb"
 require_relative "sequential_ai.rb"
 
 class Game
-	
+	attr_reader :turn
 	def initialize
-		
+		@turn = nil
 	end
 
 	def change_markers(player2)
