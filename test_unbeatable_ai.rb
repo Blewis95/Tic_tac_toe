@@ -68,4 +68,14 @@ class TestUnbeatableAI < Minitest::Test
 		ai1.pick_spot(board, "O")
 		assert_equal(result, board.setup)
 	end	
+
+	def test_pick_spot_step_4_option_1
+		board = Board.new
+		ai1 = Unbeatable_ai.new
+		ai1.turn = true
+		board.setup = ["X", " ", " ", " ", "O", " ", " ", " ", "X"]
+		result = ["X", " ", "O", " ", "O", " ", " ", " ", "X"]
+		ai1.pick_spot(board, "X")
+		assert_equal(result, board.setup)
+	end
 end

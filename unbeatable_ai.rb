@@ -18,7 +18,11 @@ class Unbeatable_ai
 
 		if @turn == true
 			check_fork(board, @create[0])
-			
+
+		end
+
+		if @turn == true
+			check_fork_enemy(board, player2_marker)
 		end
 
 		# print @counter
@@ -115,5 +119,39 @@ class Unbeatable_ai
 			end
 		
 	end
-	
+
+	def check_fork_enemy(board, marker)
+
+		winning = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
+
+		
+			counter_possibility = 0
+			option = Array.new
+			winning.each do |combos|
+				counter_taken = 0
+				counter_empty = 0
+				combos.each do |spot|
+					if (board.setup[spot] == marker)
+						counter_taken += 1
+					elsif (board.setup[spot] == " ")
+						counter_empty += 1
+					end
+				end
+
+				if (counter_taken == 1) && (counter_empty == 2)
+					counter_possibility += 1
+					option.push(combos)
+				end
+
+				puts counter_possibility
+			end
+
+			if counter_possibility == 2
+
+				same = option[0]&option[1]
+				same = same[0]
+				@counter = same
+				@turn = false
+			end
+	end
 end
