@@ -14,6 +14,7 @@ class TestUnbeatableAI < Minitest::Test
 		ai1 = Unbeatable_ai.new
 		board.setup = ["X", "X", "", "", "", "", "", "", ""]
 		result = ["X", "X", "X", "", "", "", "", "", ""]
-		assert_equal(result, ai1.pick_spot(board))
+		ai1.pick_spot(board)
+		assert_equal(result, board.setup)
 	end
 end

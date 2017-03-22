@@ -61,6 +61,7 @@ while board.check_full? == false
 		puts "Player 1 wins!"
 		break
 	elsif board.check_full? == true
+		puts "It's a Tie!"
 		break
 	end
 
