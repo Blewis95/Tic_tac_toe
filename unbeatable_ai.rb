@@ -40,6 +40,11 @@ class Unbeatable_ai
 			check_corner(board)
 		end
 
+		if @turn == true
+			check_side(board)
+			print "boop"
+		end
+
 		# print @counter
 
 		if board.check_position?(@counter) == true
@@ -279,6 +284,24 @@ class Unbeatable_ai
 				@turn = false
 			elsif board.setup[8] == " "
 				@counter = 8
+				@turn = false
+			end
+		end
+	end
+
+	def check_side(board)
+		if @turn == true
+			if board.setup[1] == " "
+				@counter = 1
+				@turn = false
+			elsif board.setup[3] == " "
+				@counter = 3
+				@turn = false
+			elsif board.setup[5] == " "
+				@counter = 5
+				@turn = false
+			elsif board.setup[7] == " "
+				@counter = 7
 				@turn = false
 			end
 		end
