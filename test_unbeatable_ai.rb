@@ -1,6 +1,7 @@
 require "minitest/autorun"
 require_relative "unbeatable_ai.rb"
 require_relative "board.rb"
+require_relative "game.rb"
 
 class TestUnbeatableAI < Minitest::Test
 	def test_new_ai
@@ -73,8 +74,22 @@ class TestUnbeatableAI < Minitest::Test
 		board = Board.new
 		ai1 = Unbeatable_ai.new
 		ai1.turn = true
+		game = Game.new
+		game.change_markers(ai1)
 		board.setup = ["X", " ", " ", " ", "O", " ", " ", " ", "X"]
 		result = ["X", " ", "O", " ", "O", " ", " ", " ", "X"]
+		ai1.pick_spot(board, "X")
+		assert_equal(result, board.setup)
+	end
+
+	def test_pick_spot_step_4_option_1_2
+		board = Board.new
+		ai1 = Unbeatable_ai.new
+		ai1.turn = true
+		game = Game.new
+		game.change_markers(ai1)
+		board.setup = ["X", " ", " ", " ", "O", " ", " ", "X", " "]
+		result = ["X", " ", " ", " ", "O", " ", "O", "X", " "]
 		ai1.pick_spot(board, "X")
 		assert_equal(result, board.setup)
 	end

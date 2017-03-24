@@ -10,19 +10,22 @@ class Unbeatable_ai
 
 		if @turn == true
 			check_win(board, @create[0])
+			# print "1"
 		end
 
 		if @turn == true
 			check_block(board, player2_marker)
+			# print "2"
 		end
 
 		if @turn == true
 			check_fork(board, @create[0])
-
+			# print "3"
 		end
 
 		if @turn == true
 			check_fork_enemy(board, player2_marker)
+			# print "4"
 		end
 
 		# print @counter
@@ -109,12 +112,17 @@ class Unbeatable_ai
 				end
 			end
 
+			# print option
+
 			if counter_possibility == 2
 
 				same = option[0]&option[1]
 				same = same[0]
-				@counter = same
-				@turn = false
+
+				if board.setup[same] == " "
+					@counter = same
+					@turn = false
+				end
 
 			end
 		
@@ -122,7 +130,7 @@ class Unbeatable_ai
 
 	def check_fork_enemy(board, marker)
 
-		winning = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
+		winning = [[0,1,2], [3,4,5], [0,3,6], [6,7,8], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
 
 		
 			counter_possibility = 0
@@ -143,8 +151,10 @@ class Unbeatable_ai
 					option.push(combos)
 				end
 
-				puts counter_possibility
+				
 			end
+			
+			# print counter_possibility
 
 			if counter_possibility == 2
 
@@ -152,6 +162,71 @@ class Unbeatable_ai
 				same = same[0]
 				@counter = same
 				@turn = false
+
+			elsif counter_possibility == 3
+
+				shared_positions = Array.new
+
+				shared_positions.push(option[0]&option[1])
+				shared_positions.push(option[0]&option[2])
+				shared_positions.push(option[1]&option[2])
+
+				shared_positions.flatten!
+
+				if (board.setup[shared_positions[0]] == " ")
+					@counter = shared_positions[0]
+					@turn = false
+
+				elsif (board.setup[shared_positions[1]] == " ")
+					@counter = shared_positions[1]
+					@turn = false
+
+				elsif (board.setup[shared_positions[2]] == " ")
+					@counter = shared_positions[2]
+					@turn = false
+				end
+
+			elsif counter_possibility == 4
+
+				shared_positions = Array.new
+
+				shared_positions.push(option[0]&option[1])
+				shared_positions.push(option[0]&option[2])
+				shared_positions.push(option[0]&option[3])
+				shared_positions.push(option[1]&option[2])
+				shared_positions.push(option[1]&option[3])
+				shared_positions.push(option[2]&option[3])
+
+
+				shared_positions.flatten!
+
+				# print shared_positions
+
+				if (board.setup[shared_positions[0]] == " ")
+					@counter = shared_positions[0]
+					@turn = false
+
+				elsif (board.setup[shared_positions[1]] == " ")
+					@counter = shared_positions[1]
+					@turn = false
+
+				elsif (board.setup[shared_positions[2]] == " ")
+					@counter = shared_positions[2]
+					@turn = false
+
+				elsif (board.setup[shared_positions[3]] == " ")
+					@counter = shared_positions[3]
+					@turn = false
+
+				elsif (board.setup[shared_positions[4]] == " ")
+					@counter = shared_positions[4]
+					@turn = false
+
+				elsif (board.setup[shared_positions[5]] == " ")
+					@counter = shared_positions[5]
+					@turn = false
+				end
+
 			end
 	end
 end
