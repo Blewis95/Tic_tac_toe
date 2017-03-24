@@ -36,6 +36,10 @@ class Unbeatable_ai
 			check_opp_corner(board, player2_marker)
 		end
 
+		if @turn == true
+			check_corner(board)
+		end
+
 		# print @counter
 
 		if board.check_position?(@counter) == true
@@ -246,17 +250,35 @@ class Unbeatable_ai
 
 	def check_opp_corner(board, marker)
 		if @turn == true
-			if board.setup[0] == marker
+			if board.setup[0] == marker && (board.setup[8] == " ")
 				@counter = 8
 				@turn = false
-			elsif board.setup[2] == marker
+			elsif board.setup[2] == marker && (board.setup[8] == " ")
 				@counter = 6
 				@turn = false
-			elsif board.setup[6] == marker
+			elsif board.setup[6] == marker && (board.setup[8] == " ")
 				@counter = 2
 				@turn = false
-			elsif board.setup[8] == marker
+			elsif board.setup[8] == marker && (board.setup[8] == " ")
 				@counter = 0
+				@turn = false
+			end
+		end
+	end
+
+	def check_corner(board)
+		if @turn == true
+			if board.setup[0] == " "
+				@counter = 0
+				@turn = false
+			elsif board.setup[2] == " "
+				@counter = 2
+				@turn = false
+			elsif board.setup[6] == " "
+				@counter = 6
+				@turn = false
+			elsif board.setup[8] == " "
+				@counter = 8
 				@turn = false
 			end
 		end
