@@ -28,6 +28,14 @@ class Unbeatable_ai
 			# print "4"
 		end
 
+		if @turn == true
+			check_center(board)
+		end
+
+		if @turn == true
+			check_opp_corner(board, player2_marker)
+		end
+
 		# print @counter
 
 		if board.check_position?(@counter) == true
@@ -151,7 +159,6 @@ class Unbeatable_ai
 					option.push(combos)
 				end
 
-				
 			end
 			
 			# print counter_possibility
@@ -228,5 +235,30 @@ class Unbeatable_ai
 				end
 
 			end
+	end
+
+	def check_center(board)
+		if (@turn == true) && (board.setup[4] == " ")
+			@counter = 4
+			@turn = false
+		end
+	end
+
+	def check_opp_corner(board, marker)
+		if @turn == true
+			if board.setup[0] == marker
+				@counter = 8
+				@turn = false
+			elsif board.setup[2] == marker
+				@counter = 6
+				@turn = false
+			elsif board.setup[6] == marker
+				@counter = 2
+				@turn = false
+			elsif board.setup[8] == marker
+				@counter = 0
+				@turn = false
+			end
+		end
 	end
 end

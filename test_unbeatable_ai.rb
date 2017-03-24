@@ -70,7 +70,7 @@ class TestUnbeatableAI < Minitest::Test
 		assert_equal(result, board.setup)
 	end	
 
-	def test_pick_spot_step_4_option_1
+	def test_pick_spot_step_4_1
 		board = Board.new
 		ai1 = Unbeatable_ai.new
 		ai1.turn = true
@@ -82,7 +82,7 @@ class TestUnbeatableAI < Minitest::Test
 		assert_equal(result, board.setup)
 	end
 
-	def test_pick_spot_step_4_option_1_2
+	def test_pick_spot_step_4_2
 		board = Board.new
 		ai1 = Unbeatable_ai.new
 		ai1.turn = true
@@ -90,6 +90,52 @@ class TestUnbeatableAI < Minitest::Test
 		game.change_markers(ai1)
 		board.setup = ["X", " ", " ", " ", "O", " ", " ", "X", " "]
 		result = ["X", " ", " ", " ", "O", " ", "O", "X", " "]
+		ai1.pick_spot(board, "X")
+		assert_equal(result, board.setup)
+	end
+
+	def test_pick_spot_step_4_3
+		board = Board.new
+		ai1 = Unbeatable_ai.new
+		ai1.turn = true
+		game = Game.new
+		game.change_markers(ai1)
+		board.setup = ["X", " ", " ", " ", "O", " ", " ", "X", " "]
+		result = ["X", " ", " ", " ", "O", " ", "O", "X", " "]
+		ai1.pick_spot(board, "X")
+		assert_equal(result, board.setup)
+	end
+
+	def test_pick_center
+		board = Board.new
+		ai1 = Unbeatable_ai.new
+		ai1.turn = true
+		board.setup = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+		result = [" ", " ", " ", " ", "X", " ", " ", " ", " "]
+		ai1.pick_spot(board, "O")
+		assert_equal(result, board.setup)
+	end
+
+	def test_pick_opposite_corner
+		board = Board.new
+		ai1 = Unbeatable_ai.new
+		game = Game.new
+		ai1.turn = true
+		game.change_markers(ai1)
+		board.setup = ["X", " ", " ", " ", "X", " ", " ", " ", " "]
+		result = ["X", " ", " ", " ", "X", " ", " ", " ", "O"]
+		ai1.pick_spot(board, "X")
+		assert_equal(result, board.setup)
+	end
+
+	def test_pick_opposite_corner_2
+		board = Board.new
+		ai1 = Unbeatable_ai.new
+		game = Game.new
+		ai1.turn = true
+		game.change_markers(ai1)
+		board.setup = [" ", " ", "X", " ", "X", " ", " ", " ", " "]
+		result = [" ", " ", "X", " ", "X", " ", "O", " ", " "]
 		ai1.pick_spot(board, "X")
 		assert_equal(result, board.setup)
 	end
