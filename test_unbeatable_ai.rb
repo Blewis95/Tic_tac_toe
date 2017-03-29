@@ -77,24 +77,12 @@ class TestUnbeatableAI < Minitest::Test
 		game = Game.new
 		game.change_markers(ai1)
 		board.setup = ["X", " ", " ", " ", "O", " ", " ", " ", "X"]
-		result = ["X", " ", " ", " ", "O", " ", "O", " ", "X"]
+		result = ["X", " ", " ", " ", "O", " ", " ", "O", "X"]
 		ai1.pick_spot(board, "X")
 		assert_equal(result, board.setup)
 	end
 
 	def test_pick_spot_step_4_2
-		board = Board.new
-		ai1 = Unbeatable_ai.new
-		ai1.turn = true
-		game = Game.new
-		game.change_markers(ai1)
-		board.setup = ["X", " ", " ", " ", "O", " ", " ", "X", " "]
-		result = ["X", " ", " ", " ", "O", " ", "O", "X", " "]
-		ai1.pick_spot(board, "X")
-		assert_equal(result, board.setup)
-	end
-
-	def test_pick_spot_step_4_3
 		board = Board.new
 		ai1 = Unbeatable_ai.new
 		ai1.turn = true
@@ -157,6 +145,28 @@ class TestUnbeatableAI < Minitest::Test
 		board.setup = ["O", " ", "O", " ", "O", " ", "O", " ", "O"]
 		result = ["O", " ", "O", " ", "O", "X", "O", " ", "O"]
 		ai1.pick_spot(board, "O")
+		assert_equal(result, board.setup)
+	end
+
+	def test_weird_case
+		board = Board.new
+		ai1 = Unbeatable_ai.new
+		ai1.turn = true
+		ai1.create = ["O", "O", "O", "O"]
+		board.setup = [" ", "X", " ", " ", "O", " ", " ", " ", "X"]
+		result = [" ", "X", "O", " ", "O", " ", " ", " ", "X"]
+		ai1.pick_spot(board, "X")
+		assert_equal(result, board.setup)
+	end
+
+	def test_weird_case_2
+		board = Board.new
+		ai1 = Unbeatable_ai.new
+		ai1.turn = true
+		ai1.create = ["O", "O", "O", "O"]
+		board.setup = [" ", " ", " ", "X", " ", " ", " ", " ", " "]
+		result = [" ", " ", " ", "X", "O", " ", " ", " ", " "]
+		ai1.pick_spot(board, "X")
 		assert_equal(result, board.setup)
 	end
 end

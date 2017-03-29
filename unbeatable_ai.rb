@@ -10,22 +10,18 @@ class Unbeatable_ai
 
 		if @turn == true
 			check_win(board, @create[0])
-			# print "1"
 		end
 
 		if @turn == true
 			check_block(board, player2_marker)
-			# print "2"
 		end
 
 		if @turn == true
 			check_fork(board, @create[0])
-			# print "3"
 		end
 
 		if @turn == true
 			check_fork_enemy(board, player2_marker)
-			# print "4"
 		end
 
 		if @turn == true
@@ -146,7 +142,7 @@ class Unbeatable_ai
 
 	def check_fork_enemy(board, marker)
 
-		winning = [[0,1,2], [3,4,5], [0,3,6], [6,7,8], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
+		winning = [[0,1,2], [3,4,5], [0,3,6], [6,7,8], [1,4,7], [2,5,8], [2,4,6], [0,4,8]]
 		
 			counter_possibility = 0
 			counter_pos = 0
@@ -177,21 +173,14 @@ class Unbeatable_ai
 			end
 			
 			# print counter_possibility
-			if counter_pos >= 1
-				option1.each do |combo|
-					combo.each do |position|
-						if board.setup[position] == " "
-							@counter = position
-							@turn = false
-						end
-					end
-				end
-			elsif counter_possibility == 2
+			
+			if (counter_possibility == 2) && (board.setup.count(" ") < 6)
 
 				same = option[0]&option[1]
 				same = same[0]
 				@counter = same
 				@turn = false
+				
 
 			elsif counter_possibility == 3
 
@@ -227,12 +216,31 @@ class Unbeatable_ai
 				shared_positions.push(option[1]&option[3])
 				shared_positions.push(option[2]&option[3])
 
-
 				shared_positions.flatten!
 
 				# print shared_positions
 
-				if (board.setup[shared_positions[0]] == " ")
+
+				if counter_pos >= 1
+					option1.each do |combo|
+						combo.each do |position|
+							if board.setup[position] == " "
+								if (board.setup[0] && board.setup[8]) || (board.setup[2] && board.setup[6]) == marker 
+									sides = [1,3,5,7]
+
+									sides.each do |x|
+										if board.setup[x] == " "
+												@counter = x
+											@turn = false
+										end
+									end
+								end
+							end
+						end
+					
+					end
+
+				elsif (board.setup[shared_positions[0]] == " ")
 					@counter = shared_positions[0]
 					@turn = false
 
@@ -255,8 +263,8 @@ class Unbeatable_ai
 				elsif (board.setup[shared_positions[5]] == " ")
 					@counter = shared_positions[5]
 					@turn = false
-				end
 
+				end	
 			end
 	end
 
