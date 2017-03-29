@@ -20,6 +20,7 @@ class Player
 
 		if @turn == true
 			board.set_position(@counter.to_i, @create.pop)
+			@turn = false
 		end
 
 		return board

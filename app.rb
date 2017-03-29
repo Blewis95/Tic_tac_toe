@@ -3,6 +3,7 @@ require_relative "random_ai.rb"
 require_relative "sequential_ai.rb"
 require_relative "game.rb"
 require_relative "player.rb"
+require_relative "Unbeatable_ai.rb"
 
 board = Board.new
 game = Game.new
@@ -10,7 +11,7 @@ ai1 = String
 ai2 = String
 
 puts "Welcome to Tic Tac Toe"
-puts "Player types: Sequential = S, Random = R, Player = P"
+puts "Player types: Sequential = S, Random = R, Player = P, Unbeatable = U"
 
 begin
 	print "Please enter AI type for player 1: "
@@ -22,10 +23,12 @@ begin
 		player1 = Random_ai.new
 	elsif ai1.upcase == "P"
 		player1 = Player.new
+	elsif ai1.upcase == "U"
+		player1 = Unbeatable_ai.new
 	else
 		puts "Error, incorrect input"
 	end
-end while (ai1.upcase != "S") && (ai1.upcase != "R") && (ai1.upcase != "P")
+end while (ai1.upcase != "S") && (ai1.upcase != "R") && (ai1.upcase != "P") && (ai1.upcase != "U")
 
 
 begin
@@ -38,36 +41,43 @@ begin
 		player2 = Random_ai.new
 	elsif ai2.upcase == "P"
 		player2 = Player.new
+	elsif ai2.upcase == "U"
+		player2 = Unbeatable_ai.new
 	else
 		puts "Error, incorrect input"
 	end
-end while (ai1.upcase != "S") && (ai1.upcase != "R") && (ai1.upcase != "P")
+end while (ai2.upcase != "S") && (ai2.upcase != "R") && (ai2.upcase != "P") && (ai2.upcase != "U")
 
 # puts player1
 # puts player2
-
 player1.turn = true
 game.change_markers(player2)
 
 # puts player1.counter
 
 while board.check_full? == false
-	
-	player1.pick_spot(board)
+
+	if ai1.upcase == "U"
+		player1.pick_spot(board, "O")
+	else
+		player1.pick_spot(board)
+	end
 
 	board.print_board
 
 	if board.check_win? == true
 		puts "Player 1 wins!"
 		break
-	elsif board.check_full? == true
-		puts "It's a Tie!"
-		break
 	end
 
-	game.change_turn(player1, player2)
+	player1.turn = false
+	player2.turn = true
 
-	player2.pick_spot(board)
+	if ai2.upcase == "U"
+		player2.pick_spot(board, "X")
+	else
+		player2.pick_spot(board)
+	end
 
 	board.print_board
 
@@ -76,7 +86,9 @@ while board.check_full? == false
 		break
 	end
 
-	game.change_turn(player1, player2)
+	player2.turn = false
+	player1.turn = true
+
 end
 
 if board.check_win? == false

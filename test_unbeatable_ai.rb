@@ -6,7 +6,7 @@ require_relative "game.rb"
 class TestUnbeatableAI < Minitest::Test
 	def test_new_ai
 		ai1 = Unbeatable_ai.new
-		result = ["X", "X", "X", "X"]
+		result = ["X", "X", "X", "X", "X"]
 		assert_equal(result, ai1.create)
 	end
 
@@ -77,7 +77,7 @@ class TestUnbeatableAI < Minitest::Test
 		game = Game.new
 		game.change_markers(ai1)
 		board.setup = ["X", " ", " ", " ", "O", " ", " ", " ", "X"]
-		result = ["X", " ", "O", " ", "O", " ", " ", " ", "X"]
+		result = ["X", " ", " ", " ", "O", " ", "O", " ", "X"]
 		ai1.pick_spot(board, "X")
 		assert_equal(result, board.setup)
 	end

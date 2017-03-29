@@ -1,7 +1,7 @@
 class Unbeatable_ai
 	attr_accessor :create, :counter, :turn
 	def initialize
-		@create = ["X", "X", "X", "X"]
+		@create = ["X", "X", "X", "X", "X"]
 		@counter = 0
 		@turn = false
 	end
@@ -42,7 +42,6 @@ class Unbeatable_ai
 
 		if @turn == true
 			check_side(board)
-			print "boop"
 		end
 
 		# print @counter
@@ -148,22 +147,29 @@ class Unbeatable_ai
 	def check_fork_enemy(board, marker)
 
 		winning = [[0,1,2], [3,4,5], [0,3,6], [6,7,8], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
-
 		
 			counter_possibility = 0
+			counter_pos = 0
 			option = Array.new
+			option1 = Array.new
 			winning.each do |combos|
+				counter_taken_opp = 0
 				counter_taken = 0
 				counter_empty = 0
 				combos.each do |spot|
 					if (board.setup[spot] == marker)
-						counter_taken += 1
+						counter_taken_opp += 1
 					elsif (board.setup[spot] == " ")
 						counter_empty += 1
+					elsif (board.setup[spot] == @create[0])
+						counter_taken += 1
 					end
 				end
 
 				if (counter_taken == 1) && (counter_empty == 2)
+					counter_pos += 1
+					option1.push(combos)
+				elsif (counter_taken_opp == 1) && (counter_empty == 2)
 					counter_possibility += 1
 					option.push(combos)
 				end
@@ -171,8 +177,16 @@ class Unbeatable_ai
 			end
 			
 			# print counter_possibility
-
-			if counter_possibility == 2
+			if counter_pos >= 1
+				option1.each do |combo|
+					combo.each do |position|
+						if board.setup[position] == " "
+							@counter = position
+							@turn = false
+						end
+					end
+				end
+			elsif counter_possibility == 2
 
 				same = option[0]&option[1]
 				same = same[0]
