@@ -169,4 +169,26 @@ class TestUnbeatableAI < Minitest::Test
 		ai1.pick_spot(board, "X")
 		assert_equal(result, board.setup)
 	end
+
+	def test_weird_case_3
+		board = Board.new
+		ai1 = Unbeatable_ai.new
+		ai1.turn = true
+		ai1.create = ["O", "O", "O", "O"]
+		board.setup = [" ", " ", " ", " ", "O", "X", " ", "X", " "]
+		result = [" ", " ", " ", " ", "O", "X", " ", "X", "O"]
+		ai1.pick_spot(board, "X")
+		assert_equal(result, board.setup)
+	end
+
+	def test_weird_case_4
+		board = Board.new
+		ai1 = Unbeatable_ai.new
+		ai1.turn = true
+		ai1.create = ["O", "O", "O", "O"]
+		board.setup = [" ", " ", "O", "O", "X", " ", "X", " ", " "]
+		result = [" ", " ", " ", " ", "O", "X", " ", "X", "O"]
+		ai1.pick_spot(board, "X")
+		assert_equal(result, board.setup)
+	end
 end

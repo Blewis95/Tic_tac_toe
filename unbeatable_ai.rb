@@ -1,8 +1,11 @@
+require_relative "board.rb"
+
+
 class Unbeatable_ai
 	attr_accessor :create, :counter, :turn
 	def initialize
 		@create = ["X", "X", "X", "X", "X"]
-		@counter = 0
+		@counter = 1
 		@turn = false
 	end
 
@@ -10,34 +13,42 @@ class Unbeatable_ai
 
 		if @turn == true
 			check_win(board, @create[0])
+			# print "1"
 		end
 
 		if @turn == true
 			check_block(board, player2_marker)
+			# print "2"
 		end
 
 		if @turn == true
 			check_fork(board, @create[0])
+			# print "3"
 		end
 
 		if @turn == true
 			check_fork_enemy(board, player2_marker)
+			# print "4"
 		end
 
 		if @turn == true
 			check_center(board)
+			# print "5"
 		end
 
 		if @turn == true
 			check_opp_corner(board, player2_marker)
+			# print "6"
 		end
 
 		if @turn == true
 			check_corner(board)
+			# print "7"
 		end
 
 		if @turn == true
 			check_side(board)
+			# print "8"
 		end
 
 		# print @counter
@@ -87,6 +98,7 @@ class Unbeatable_ai
 						matches += 1
 					end
 				
+
 					if matches == 2
 						combos.each do |spot|
 							if (board.setup[spot] == " ")
@@ -124,7 +136,7 @@ class Unbeatable_ai
 				end
 			end
 
-			# print option
+			# print "option: #{option}"
 
 			if counter_possibility == 2
 
@@ -133,6 +145,29 @@ class Unbeatable_ai
 
 				if board.setup[same] == " "
 					@counter = same
+					@turn = false
+				end
+
+			elsif counter_possibility == 3
+
+				shared_positions = Array.new
+
+				shared_positions.push(option[0]&option[1])
+				shared_positions.push(option[0]&option[2])
+				shared_positions.push(option[1]&option[2])
+
+				shared_positions.flatten!
+
+				if (board.setup[shared_positions[0]] == " ")
+					@counter = shared_positions[0]
+					@turn = false
+
+				elsif (board.setup[shared_positions[1]] == " ")
+					@counter = shared_positions[1]
+					@turn = false
+
+				elsif (board.setup[shared_positions[2]] == " ")
+					@counter = shared_positions[2]
 					@turn = false
 				end
 
@@ -146,8 +181,10 @@ class Unbeatable_ai
 		
 			counter_possibility = 0
 			counter_pos = 0
+			counter_empty_arrays = 0
 			option = Array.new
 			option1 = Array.new
+			empty_op = Array.new
 			winning.each do |combos|
 				counter_taken_opp = 0
 				counter_taken = 0
@@ -172,15 +209,35 @@ class Unbeatable_ai
 
 			end
 			
-			# print counter_possibility
+			# puts "counter_pos: #{counter_pos}"
+
+			# p option1
 			
-			if (counter_possibility == 2) && (board.setup.count(" ") < 6)
+			if (counter_possibility == 2) && (board.setup.count(" ") <= 6)
 
 				same = option[0]&option[1]
-				same = same[0]
-				@counter = same
-				@turn = false
-				
+
+				# puts "same: #{same}"
+				# puts "option[0]: #{option[0]}"
+				# puts "option[1]: #{option[1]}"
+
+			
+				if same == []
+
+					corners = [0,2,6,8]
+
+					@counter = corners.sample
+					@turn = false
+				else
+					# puts "hello"
+					@counter = same[0]
+					# puts "counter: #{@counter}"
+					@turn = false
+					# puts "@turn: #{@turn}"
+
+				end
+				# puts "@counter: #{@counter}"
+
 
 			elsif counter_possibility == 3
 
@@ -329,3 +386,14 @@ class Unbeatable_ai
 		end
 	end
 end
+
+		# board = Board.new
+		# ai1 = Unbeatable_ai.new
+		# ai1.turn = true
+		# ai1.create = ["X", "X", "X", "X", "X"]
+		# # board.setup = [" ", " ", " ", "X", "O", "X", " ", " ", " "]
+		# board.setup = [" ", " ", "O", "O", "X", " ", "X", " ", " "]
+		# ai1.pick_spot(board, "O")
+		# #ai1.check_fork_enemy(board, "O")
+		# board.print_board
+

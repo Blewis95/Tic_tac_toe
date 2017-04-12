@@ -10,9 +10,9 @@ class Board
 
 	def check_position?(position)
 		if @setup[position] == " "
-			true
+			return true
 		else
-			false
+			return false
 		end
 	end
 
