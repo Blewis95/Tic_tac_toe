@@ -315,4 +315,3 @@ puts "sequential2 wins : #{ai2_win}"
 puts "ties : #{tie_game}"
 
 puts "\n"
-
