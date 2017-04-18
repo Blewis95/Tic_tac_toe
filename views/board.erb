@@ -1,4 +1,61 @@
 <%= 
-if pl1 == "player"
-	print "hello"
-end %>
+require "C:/Users/Blewis!/Documents/Mined_Minds/Code/Tic_Tac_Toe/unbeatable_ai.rb"
+require "C:/Users/Blewis!/Documents/Mined_Minds/Code/Tic_Tac_Toe/board.rb"
+require "C:/Users/Blewis!/Documents/Mined_Minds/Code/Tic_Tac_Toe/game.rb"
+require "C:/Users/Blewis!/Documents/Mined_Minds/Code/Tic_Tac_Toe/random_ai.rb"
+require "C:/Users/Blewis!/Documents/Mined_Minds/Code/Tic_Tac_Toe/sequential_ai.rb"
+require "C:/Users/Blewis!/Documents/Mined_Minds/Code/Tic_Tac_Toe/player.rb"
+
+game = Game.new
+board = Board.new
+
+	if pl1 == "player"
+		player1 = Player.new
+	elsif pl1 == "easy"
+		player1 = Sequential.new
+	elsif pl1 == "medium"
+		player1 = Random_ai.new
+	elsif pl1 == "hard"
+		player1 = Unbeatable_ai.new
+	end
+
+	if pl2 == "player"
+		player2 = Player.new
+	elsif pl2 == "easy"
+		player2 = Sequential.new
+	elsif pl2 == "medium"
+		player2 = Random_ai.new
+	elsif pl2 == "hard"
+		player2 = Unbeatable_ai.new
+	end
+
+	player1.turn = true
+	game.change_markers(player2)
+%>
+
+<center><table border="1" width="50%" height="50%">
+	<tr>
+		<th id="spot1" onmouseover="mouseOver(1)" onmouseout="mouseOut(1)"></th>
+		<th id="spot2" onmouseover="mouseOver(2)" onmouseout="mouseOut(2)"></th>
+		<th id="spot3" onmouseover="mouseOver(3)" onmouseout="mouseOut(3)"></th>
+	</tr>
+	<tr>
+		<th id="spot4" onmouseover="mouseOver(4)" onmouseout="mouseOut(4)"></th>
+		<th id="spot5" onmouseover="mouseOver(5)" onmouseout="mouseOut(5)"></th>
+		<th id="spot6" onmouseover="mouseOver(6)" onmouseout="mouseOut(6)"></th>
+	</tr>
+	<tr>
+		<th id="spot7" onmouseover="mouseOver(7)" onmouseout="mouseOut(7)"></th>
+		<th id="spot8" onmouseover="mouseOver(8)" onmouseout="mouseOut(8)"></th>
+		<th id="spot9" onmouseover="mouseOver(9)" onmouseout="mouseOut(9)"></th>
+	</tr>
+</table></center>
+
+<script>
+	function mouseOver(num) {
+		document.getElementById("spot" + num).style.background = "red";
+	}
+	function mouseOut(num) {
+    	document.getElementById("spot" + num).style.background = "white";
+	}
+</script>

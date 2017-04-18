@@ -1,5 +1,9 @@
 require 'sinatra'
-require_relative 'board.rb'
+require_relative "unbeatable_ai.rb"
+require_relative "board.rb"
+require_relative "game.rb"
+require_relative "random_ai.rb"
+require_relative "sequential_ai.rb"
 enable :sessions
 
 get '/' do
