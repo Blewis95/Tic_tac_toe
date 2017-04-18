@@ -1,4 +1,6 @@
+<form method="post" action="game">
 <center><h1>Tic Tac Toe</h1></center>
+<center><img src="logo.png" alt="Tic Tac Toe"></center>
 <center><h3>Select player types</h3></center>
 <table width="100%">
 	<tr>
@@ -7,13 +9,23 @@
 	</tr>
 	<tr>
 		<th>
-			<select>
+			<select name="player1">
 				<option value="player">Player</option>
 				<option value="easy">Easy</option>
 				<option value="medium">Medium</option>
 				<option vlaue="hard">Hard</option>
 			</select>
 		</th>
-		<th></th>
+		<th>
+			<select name="player2">
+				<option value="player">Player</option>
+				<option value="easy">Easy</option>
+				<option value="medium">Medium</option>
+				<option value="hard">Hard</option>
+			</select>
+		</th>
 	</tr>
 </table>
+<center>
+	<input type="submit" value="Submit">
+</center></form>
