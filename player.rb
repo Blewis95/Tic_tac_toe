@@ -8,11 +8,11 @@ class Player
 
 	def pick_spot(board, choice)
 		begin
-			"Please choose a spot between 0 and 8"
+			# "Please choose a spot between 0 and 8"
 			@counter = choice
 
 			while board.check_position?(@counter.to_i) == false
-				"Position is full! please try again:"
+				# "Position is full! please try again:"
 				@counter = choice
 			end 
 

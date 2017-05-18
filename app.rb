@@ -36,32 +36,51 @@ post '/p1move' do
 		session[:pl2] = Unbeatable_ai.new
 	end
 
-	session[:pl1].turn == true
-	game = Game.new
-	game.change_markers(session[:pl2])
-	session[:game] = game
+	# session[:pl1].create = Array.new(8, "X")
+	# session[:pl2].create = Array.new(8, "O")
+	session[:pl1].turn = true
+	session[:game] = Game.new
+	session[:game].change_markers(session[:pl2])
 	session[:board] = Board.new
+	session[:turns] = 0
 	redirect '/board'
 
 	
 end
 
 get '/board' do
+
+	session[:choice] = params[:choice].to_i
+
 	if session[:pl1].turn == true
-		if session[:pl1].class == "player"
-			session[:board].set_position(params[:choice].to_i,"X")
-		elsif session[:pl1].class == "Unbeatable_ai"
+		if session[:pl1].class == Player && session[:turns] != 0
+			session[:pl1].pick_spot(session[:board], session[:choice])
+			session[:pl2].turn = true
+			session[:pl1].turn = false
+			# session[:board].set_position(params[:choice].to_i,"X")
+		elsif session[:pl1].class == Unbeatable_ai && session[:turns] != 0
 			session[:pl1].pick_spot(session[:board],"O")
-		else
+			session[:pl2].turn = true
+			session[:pl1].turn = false
+		elsif session[:turns] != 0
 			session[:pl1].pick_spot(session[:board])
+			session[:pl2].turn = true
+			session[:pl1].turn = false
 		end
 	elsif session[:pl2].turn == true
-		if session[:pl2].class == player
-			session[:board].set_position(params[:choice].to_i,"X")
+		if session[:pl2].class == Player
+			session[:pl2].pick_spot(session[:board], session[:choice])
+			session[:pl1].turn = true
+			session[:pl2].turn = false
+			# session[:board].set_position(params[:choice].to_i,"O")
 		elsif session[:pl2].class == Unbeatable_ai
-			session[:pl2].pick_spot(session[:board],"O")
-		else
+			session[:pl2].pick_spot(session[:board],"X")
+			session[:pl1].turn = true
+			session[:pl2].turn = false
+		elsif
 			session[:pl2].pick_spot(session[:board])
+			session[:pl1].turn = true
+			session[:pl2].turn = false
 		end
 	end
 	erb :board, :locals => {:board => session[:board]}
@@ -69,21 +88,22 @@ end
 
 post "/move" do
 
-	if session[:pl1].turn == true
-		session[:pl1].turn = false
-		session[:pl2].turn = true
-	elsif session[:pl2].turn == true
-		session[:pl2].turn = false
-		session[:pl1].turn = true
+	session[:turns] += 1
+
+	if session[:board].check_win? == true
+		session[:finish] = "Winner!"
+		redirect '/gameover'
+	elsif session[:board].check_win? == false && session[:board].check_full? == true
+		session[:finish] = "Tie!"
+		redirect '/gameover'
 	end
+
 
 	redirect '/board'
 	
-
 	
 end
 
-# post "p2move" do
-
-
-# end
+get '/gameover' do
+	erb :gameover
+end
