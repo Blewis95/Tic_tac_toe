@@ -48,9 +48,7 @@ post '/p1move' do
 	
 end
 
-get '/board' do
-
-	# session[:choice] = params[:choice].to_i
+get '/board' do	
 
 	if session[:pl1].turn == true
 		if session[:pl1].class == Player && session[:turns] != 0
@@ -88,8 +86,11 @@ end
 
 post "/move" do
 
+
 	session[:choice] = ((params[:choice].to_i) - 1)
 	session[:turns] += 1
+
+	
 
 	if session[:board].check_win? == true
 		session[:finish] = "Winner!"
@@ -97,6 +98,12 @@ post "/move" do
 	elsif session[:board].check_win? == false && session[:board].check_full? == true
 		session[:finish] = "Tie!"
 		redirect '/gameover'
+	end
+
+	if session[:board].check_position?(session[:choice]) == false
+		if (session[:pl1].class == Player && session[:pl1].turn == true) || (session[:pl2].class == Player && session[:pl2].turn == true)
+			redirect '/tryagain'
+		end
 	end
 
 
@@ -107,4 +114,12 @@ end
 
 get '/gameover' do
 	erb :gameover
+end
+
+get '/tryagain' do 
+	erb :tryagain
+end
+
+post '/tryagain' do
+	erb :board, :locals => {:board => session[:board]}
 end
