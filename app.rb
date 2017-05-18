@@ -50,7 +50,7 @@ end
 
 get '/board' do
 
-	session[:choice] = params[:choice].to_i
+	# session[:choice] = params[:choice].to_i
 
 	if session[:pl1].turn == true
 		if session[:pl1].class == Player && session[:turns] != 0
@@ -88,6 +88,7 @@ end
 
 post "/move" do
 
+	session[:choice] = ((params[:choice].to_i) - 1)
 	session[:turns] += 1
 
 	if session[:board].check_win? == true
