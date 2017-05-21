@@ -123,3 +123,7 @@ end
 post '/tryagain' do
 	erb :board, :locals => {:board => session[:board]}
 end
+
+post '/playagain' do
+	erb :menu
+end
